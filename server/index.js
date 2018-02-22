@@ -26,7 +26,6 @@ app.get("/fetch", function(req, res) {
 //This route receives a request upon submit from the form. The form holds all fields necesaary
 //to make a new db entry. This route will take in the request and simply save to the db
 app.post("/savepost", function(req, res) {
-  console.log('HELLO', req.body);
   var listing = req.body
   console.log("saving to database...");
   db.query(
