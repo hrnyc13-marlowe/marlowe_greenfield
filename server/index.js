@@ -17,7 +17,7 @@ app.get("/fetch", function(req, res) {
   db.query("SELECT * FROM post WHERE isClaimed=false;", (err, results) => {
     if (err) console.log("FAILED to retrieve from database");
     else {
-      console.log("succesfully retireved from database");
+      console.log(results);
       res.send(results);
     }
   });
@@ -27,7 +27,7 @@ app.get("/fetch", function(req, res) {
 //to make a new db entry. This route will take in the request and simply save to the db
 app.post("/savepost", function(req, res) {
   console.log('HELLO', req.body);
-  var listing = req.body
+  var listing = req.body;
   console.log("saving to database...");
   db.query(
     `INSERT INTO post (title, description, address, city, state, zipCode, isClaimed, createdAt) VALUES ("${listing.title}", "${listing.description}", "${listing.address}","${listing.city}", "${listing.state}", "${listing.zipCode}", ${listing.isClaimed}, ${Date.now()});`,

@@ -28,6 +28,6 @@ CREATE TABLE post (
   zipCode VARCHAR(6),
   isClaimed BOOLEAN,
   emailAddress VARCHAR(50),
-  createdAt INTEGER,
+  createdAt VARCHAR(100),
   PRIMARY KEY (id)
 )

@@ -12,9 +12,6 @@ class App extends React.Component {
     this.state = {
       posts: [],
       featuredItem: {
-        title: null,
-        description: null,
-        id: null
       }
     };
 
@@ -49,7 +46,7 @@ class App extends React.Component {
     this.setState({
       posts: data
     });
-    console.log("this is state.posts: ", this.state.posts);
+
   }
 
   handleClaim(claimedPostID) {
@@ -81,10 +78,7 @@ class App extends React.Component {
           </ReactBootstrap.Row>
         </ReactBootstrap.Grid>
         <DescriptionCard
-          title={this.state.featuredItem.title}
-          description={this.state.featuredItem.description}
-          id={this.state.featuredItem.id}
-          claimHanlder={this.handleClaim}
+          featuredItem= {this.state.featuredItem}
         />
       </div>
     );
