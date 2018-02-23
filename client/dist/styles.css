@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .listheader {
   text-align: center;
   color: #e8532e;
@@ -6,6 +10,11 @@
 
 .listheader h2 {
   color: #e8532e;
+}
+
+.list ul {
+  margin: 0;
+  padding: 0;
 }
 
 .listItem {
@@ -19,7 +28,8 @@
   margin: 10px;
   font-size: 2rem;
   line-height: 2.4rem;
-  font-family: monospace
+  /*font-family: monospace;*/
+  position: relative;
 }
 
 .listItem div {
@@ -61,3 +71,31 @@
 .navbar {
   margin-bottom:0;
 }
+
+.pop {
+  min-height: 400px;
+  min-width: 400px;
+}
+
+.Login {
+  max-width: 400px;
+  margin: 10% auto;
+}
+
+.Login h1 {
+  text-align: center;
+}
+
+.formDonate {
+  padding-top: 40px;
+}
+
+.formDonate input, .formDonate button {
+  margin: 8px;
+}
+
+.popover>.arrow, .popover>.arrow:after {
+  display: none;
+}
+
+
