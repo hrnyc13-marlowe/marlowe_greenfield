@@ -53,7 +53,7 @@ body {
 .jumbotron {
   text-align: center;
   color: black;
-  height: 400px;
+  height: 575px;
   background-image: url('images/allHandsIn.jpg');
   /* background-size: auto 100%; */
   /* background-position: 0 0; */
@@ -96,6 +96,11 @@ body {
 
 .popover>.arrow, .popover>.arrow:after {
   display: none;
+}
+
+.mainText{
+  position: relative;
+  top: 25%;
 }
 
 
