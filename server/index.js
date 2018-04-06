@@ -43,25 +43,31 @@ app.get("/fetch", function(req, res) {
 //This route receives a request upon submit from the form. The form holds all fields necesaary
 //to make a new db entry. This route will take in the request and simply save to the db
 app.post("/savepost", function(req, res) {
+  console.log(req.body);
   var listing = req.body;
   db.query(
-    `INSERT INTO post (title, description, address, city, state, zipCode, phone, isClaimed, createdAt, photoUrl) VALUES ("${
+    `INSERT INTO post (title, description, address, city, state, zipCode, emailAddress, isClaimed, createdAt, photoUrl) VALUES ("${
       listing.title
     }", "${listing.description}", "${listing.address}","${listing.city}", "${
       listing.state
-    }", "${listing.zipCode}", "${listing.phone}", ${
-      listing.isClaimed
-    }, "${moment().unix()}", "${listing.photoUrl}");`,
+    }", "${listing.zipCode}", "${listing.emailAddress}", false, "${moment().unix()}", "${listing.photoUrl}");`,
     (err, data) => {
+      console.log('entry made?')
       res.end();
     }
   );
 });
 
+app.get('/logout', function(req, res) {
+  console.log('request received');
+  req.session.destroy()
+  res.status(200).send()
+})
+
 app.post("/latlong", function(req, res) {
 
-  //This function is using geohelper function which utilizes Google's geocoder API 
-  //Note: if an invalid address is passed to this method, it will cause the server to crash 
+  //This function is using geohelper function which utilizes Google's geocoder API
+  //Note: if an invalid address is passed to this method, it will cause the server to crash
   // due to the map not being able to find a real address. Recommend: Implement google maps auto
   // complete on the form to always guarantee a correct address
 
@@ -91,17 +97,20 @@ app.post("/updateentry", function(req, res) {
 //Also note, a 'claimer' is the same as a 'user' - all accounts are can Create and Claim posts - we intentionally
 //wanted to create separate "Claimer" and "Provider" accounts; that's now up to you to decide :)
 app.post("/signup", function(req, res) {
-  var sqlQuery = `INSERT INTO claimer (claimerUsername, claimerZipCode, cPassword) VALUES (?, ?, ?)`;
-  var placeholderValues = [
-    req.body.username,
-    req.body.zipcode,
-    req.body.password
-  ];
-  db.query(sqlQuery, placeholderValues, function(error) {
+  console.log(req.body);
+  var username = req.body.username;
+  var password = req.body.password;
+  var sqlQuery = `INSERT INTO claimer (claimerUsername, cPassword) VALUES ('${username}', '${password}')`;
+
+  db.query(sqlQuery, function(error, results) {
     if (error) {
       throw error;
+    } else if (results.length === 0) {
     } else {
-      res.end();
+      req.session.regenerate(err => {
+        req.session.username = req.body.username;
+      });
+      res.end(req.body.username);
     }
   });
 });
@@ -118,7 +127,7 @@ app.post("/login", function(req, res) {
       req.session.regenerate(err => {
         req.session.username = req.body.username;
       });
-      res.end();
+      res.end(req.body.username);
     }
   });
 });
@@ -138,7 +147,7 @@ app.post("/chat", function(req, res) {
   client.messages
     .create({
       body: `Thank you for claiming ${req.body.title} and helping the world !`,
-      to: '+19296660205', // Text this number - this is hard coded unless you'd like to upgrade your account =) 
+      to: '+19296660205', // Text this number - this is hard coded unless you'd like to upgrade your account =)
       from: "+14255054003 " // From a valid Twilio number
     })
     .then(message => {
@@ -146,7 +155,7 @@ app.post("/chat", function(req, res) {
       client2.messages
         .create({
           body: `Your posting ${req.body.title} has been claimed ! You'll be contacted soon !`,
-          to: +'19162567256', // Text this number this is hard coded unless you'd like to upgrade your account =) 
+          to: +'19162567256', // Text this number this is hard coded unless you'd like to upgrade your account =)
           from: "+14255054003 " // From a valid Twilio number
         })
         .then(message => {

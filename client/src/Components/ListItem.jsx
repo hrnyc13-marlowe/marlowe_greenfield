@@ -16,7 +16,7 @@ const ListItem = (props) => {
     </div>
     </div>
     </OverlayTrigger>
-  ) 
+  )
 }
 
 

@@ -17,8 +17,8 @@ connection.connect((err) => {
   }
 });
 
-//IF you need to drop tables on the hosted database, uncomment the below:
-// connection.query(`DROP TABLE IF EXISTS post`, (err, res) => {
+// IF you need to drop tables on the hosted database, uncomment the below:
+// connection.query(`DROP TABLE IF EXISTS claimer`, (err, res) => {
 // if (err) console.log(err)
 // })
 
@@ -31,8 +31,7 @@ pPassword VARCHAR(16),PRIMARY KEY(id));`
 
 connection.query(`CREATE TABLE IF NOT EXISTS claimer (
   id INTEGER AUTO_INCREMENT NOT NULL,
-  claimerUsername VARCHAR(16),
-  claimerZipCode INTEGER NOT NULL,
+  claimerUsername VARCHAR(50),
   cPassword VARCHAR(16),
   PRIMARY KEY (id)
 );`, (err, res) => {

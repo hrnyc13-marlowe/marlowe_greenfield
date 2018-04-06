@@ -1,6 +1,40 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #2a7ad6;
 }
+
+#title {
+  color: #ffffff;
+  font-family: 'Pacifico', cursive;
+  font-size: 4em;
+  text-shadow: 2px 2px #000000;
+}
+.welcome-container{
+  background-image: url('./images/CaringHeartPostpic.1110x659.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+
+nav.navbar.navbar-default{
+  background-color: #4d93e2;
+  font-size: 2em;
+}
+
+navbar-brand.navbar-default a {
+   font-size: 2em; !imporant
+}
+
+nav.navbar.navbar-default a {
+  font-size: 1em;
+  color: #ffffff; !imporant
+}
+
 
 .listheader {
   text-align: center;
@@ -18,28 +52,29 @@ body {
 }
 
 .listItem {
-  background-color: #FFC97C;
-  padding: 10px 50px 20px;
+  background-color: #3989d2;
+  padding: 10px 50px 10px;
   display: flex;
   border: 1px solid #DCDEDD;
   border-radius: 8px;
   box-shadow: -7px 4px 5px #d0caca;
   box-sizing: inherit;
   margin: 10px;
+  max-width: 340px;
   font-size: 2rem;
-  line-height: 2.4rem;
+  line-height: 2rem;
   /*font-family: monospace;*/
   position: relative;
 }
 
 .listItem div {
-  color: #dc6f54;
+  color: #ffffff;
 }
 
 .listItem:hover {
   box-shadow: -7px 4px 5px #504f4f;
   font-weight: bold;
-} 
+}
 
 
 .listDescription {
@@ -52,7 +87,7 @@ body {
 
 .jumbotron {
   text-align: center;
-  color: black;
+  color: white;
   height: 575px;
   background-image: url('images/allHandsIn.jpg');
   /* background-size: auto 100%; */
@@ -101,6 +136,5 @@ body {
 .mainText{
   position: relative;
   top: 25%;
+  text-shadow: 2px 2px #000000;  
 }
-
-

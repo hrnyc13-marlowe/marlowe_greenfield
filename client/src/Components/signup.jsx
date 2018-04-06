@@ -64,14 +64,7 @@ export default class Signup extends Component {
               type="zipcode"
             />
           </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-            onClick={this.handleSignup}
-          >Sign up !
-          </Button>
+
         </form>
       </div>
     );

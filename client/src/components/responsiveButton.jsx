@@ -14,13 +14,13 @@ class Trigger extends React.Component {
           <Modal.Title id="contained-modal-title-lg">Thank You for Listing! Your Donation Has Been Listed!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
+
           <p>
-            You can expect to hear back from a eager recipient in a matter of days! It is thanks to 
+            You can expect to hear back from a eager recipient in a matter of days! It is thanks to
             volunteers like you that keep our vision at Kindly alive.
           </p>
-    
-          
+
+
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>

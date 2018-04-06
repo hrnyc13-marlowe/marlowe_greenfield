@@ -5,7 +5,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import axios from 'axios'
 
 
-export default class Login extends Component {
+export default class LoginPage extends Component {
   constructor(props) {
     super(props);
 
@@ -15,6 +15,7 @@ export default class Login extends Component {
     };
     this.validateForm =this.validateForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSignup = this.handleSignup.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -33,50 +34,74 @@ export default class Login extends Component {
     axios.post('/login', {
       username: this.state.email,
       password: this.state.password
-    }).then(() => {
+    }).then((response) => {
       console.log("Successfully logged in")
       this.setState({username: '', password: ''});
-      ReactDOM.render(<App />, document.getElementById("app"));
+      ReactDOM.render(<App userName={response.data}/>, document.getElementById("app"));
     }).catch((error) => {
       throw error;
     })
 
   }
 
+  handleSignup(e){
+    e.preventDefault();
+    axios.post('/signup', {
+      username: this.state.email,
+      password: this.state.password,
+    }).then((response) => {
+      this.setState({username: '', password: ''});
+      ReactDOM.render(<App userName={response.data}/>, document.getElementById("app"));
+    }).catch((error) => {
+      throw error;
+    })
+  }
+
   render() {
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-           
-          <h1>Kindly</h1>
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          <Button
-            block
-            bsStyle="warning"
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-            onClick={this.handleSubmit}
-          >
-            Login
-          </Button>
-        </form>
+      <div className="welcome-container">
+        <div className="Login">
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="email" bsSize="large">
+
+            <h1 id='title'>Kindly</h1>
+              <ControlLabel>Email</ControlLabel>
+              <FormControl
+                autoFocus
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="password" bsSize="large">
+              <ControlLabel>Password</ControlLabel>
+              <FormControl
+                value={this.state.password}
+                onChange={this.handleChange}
+                type="password"
+              />
+            </FormGroup>
+            <Button
+              block
+              bsStyle="warning"
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+              onClick={this.handleSubmit}
+            >
+              Login
+            </Button>
+            <Button
+              block
+              bsStyle="warning"
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+              onClick={this.handleSignup}
+            >Sign up
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }

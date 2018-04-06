@@ -7,8 +7,8 @@ import Maintron from "./components/jumbotron.jsx";
 import List from "./components/list.jsx";
 import Form from "./components/form.jsx";
 import DescriptionCard from "./components/descriptionCard.jsx";
-import LoginPage from "./components/login.jsx"
-import Signup from "./components/signup.jsx"
+import LoginPage from "./Components/login.jsx"
+import Signup from "./Components/signup.jsx"
 import MapComponent from "./components/googleMaps.jsx"
 import Trigger from "./components/responsiveButton.jsx"
 import { Link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
@@ -36,6 +36,7 @@ class App extends React.Component {
     this.lgShow = this.lgShow.bind(this);
     this.lgClose = this.lgClose.bind(this);
     this.ScrollTo = this.ScrollTo.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount() {
@@ -46,8 +47,9 @@ class App extends React.Component {
   //retrieves lat/long data from server/geo-helper function
   //sets the lat/long state, which is passed to the googleMaps component that renders the map
   changeFeatured(listItem) {
+    console.log(this.state.show);
     if (this.state.show === false){
-      this.setState({ 
+      this.setState({
         featuredItem: listItem,
         show: true
      });
@@ -114,7 +116,7 @@ class App extends React.Component {
     });
     this.retrievePosts();
   }
-  
+
   //This func is being passed to the Form Compnent and Trigger Component/Modal and opens it
   lgShow(){
     this.setState({
@@ -126,12 +128,20 @@ class App extends React.Component {
   ScrollTo(){
     scroll.scrollTo(550);
   }
- 
+
+  logOut() {
+    axios.get('/logout')
+    .then(()=> {
+      console.log('response received');
+      ReactDOM.render(<LoginPage />, document.getElementById("app"));
+    })
+  }
 
   render() {
+    console.log(this.props.userName)
     return (
       <div>
-      <NavigationBar onClick={this.ScrollTo}/>
+      <NavigationBar onClick={this.ScrollTo} logOut={this.logOut} userName={this.props.userName} />
       <Maintron scrollTo={this.ScrollTo}/>
         <ReactBootstrap.Grid className="show-grid">
           <ReactBootstrap.Row>
@@ -143,7 +153,7 @@ class App extends React.Component {
               />
             </ReactBootstrap.Col>
             <ReactBootstrap.Col className="pass" md={6}>
-             {this.state.show === false
+             {!this.state.show
               ? <Form showModal={this.lgShow}/>
               :  <DescriptionCard
                     featuredItem = {this.state.featuredItem}

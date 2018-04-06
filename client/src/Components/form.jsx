@@ -7,7 +7,7 @@ class Form extends React.Component {
     super(props);
     this.state = {
       username: '',
-      phone: '',
+      email: '',
       title: '',
       description: '',
       address: '',
@@ -20,7 +20,7 @@ class Form extends React.Component {
     this.savePost = this.savePost.bind(this);
     this.clearFields = this.clearFields.bind(this);
     this.handleUsername = this.handleUsername.bind(this);
-    this.handlePhone = this.handlePhone.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
@@ -45,7 +45,7 @@ class Form extends React.Component {
   clearFields() {
     this.setState({
       username: '',
-      phone: '',
+      email: '',
       title: '',
       description: '',
       address: '',
@@ -61,9 +61,9 @@ class Form extends React.Component {
       username: e.target.value
     });
   }
-  handlePhone(e) {
+  handleEmail(e) {
     this.setState({
-      phone: e.target.value
+      email: e.target.value
     });
   }
   handleTitle(e) {
@@ -103,11 +103,11 @@ class Form extends React.Component {
   }
    render() {
 
-    //Here is where a user enters their posting. Ensure that the address input is a real address. Recommend using 
+    //Here is where a user enters their posting. Ensure that the address input is a real address. Recommend using
     // google maps auto complete API to ensure this. Server will break if an inputted address is invalid (not a real address)
-    
 
-    //STATE INPUT: only accepts two chars (e.g, NY, CA) - if anything beyond two chars is submitted, this will not be saved to 
+
+    //STATE INPUT: only accepts two chars (e.g, NY, CA) - if anything beyond two chars is submitted, this will not be saved to
     // the mySql database - this is a restriction set in the schema.
 
 
@@ -148,9 +148,9 @@ class Form extends React.Component {
           />
         <FormControl
           type="text"
-          value={this.state.phone}
-          placeholder="Phone Number"
-          onChange={(e) => {this.handlePhone(e)}}
+          value={this.state.email}
+          placeholder="Email Address"
+          onChange={(e) => {this.handleEmail(e)}}
           />
           <FormControl style={{height: '125px'}}
             type="text"
